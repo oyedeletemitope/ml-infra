@@ -12,23 +12,15 @@ spec:
   selector:
     matchLabels:
       app: wine-api
-      app.kubernetes.io/name: wine-api
-      app.kubernetes.io/component: ml-api
-      app.kubernetes.io/version: v1.0.0
   template:
     metadata:
       labels:
         app: wine-api
-        app.kubernetes.io/name: wine-api
-        app.kubernetes.io/component: ml-api
-        app.kubernetes.io/version: v1.0.0
     spec:
       containers:
       - name: wine-api
-        image: jozu.ml/oyedeletemitope76/wine-quality-modelkit/basic:v1.0.0
-        command: ["python", "-m", "uvicorn"]
-        args: ["main:app", "--host", "0.0.0.0", "--port", "8000"]
-        workingDir: /app
+        image: jozu.ml/oyedeletemitope76/wine-quality-modelkit:basic-v1.0.1
+        command: ["/app/start.sh"]
         ports:
         - containerPort: 8000
         env:
