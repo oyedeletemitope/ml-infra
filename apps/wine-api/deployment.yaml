@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: wine-api
-        image: jozu.ml/oyedeletemitope76/wine-quality-modelkit:basic-v1.0.1
+        image: "jozu.ml/oyedeletemitope76/wine-quality-modelkit/basic:v1.0.1"
         command: ["/app/start.sh"]
         ports:
         - containerPort: 8000
