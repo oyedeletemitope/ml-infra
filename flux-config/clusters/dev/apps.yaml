@@ -16,7 +16,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./apps/wine-quality-classifier
+  path: ./apps/wine-api
   prune: true
   sourceRef:
     kind: GitRepository
