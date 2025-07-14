@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: master  # Changed from main to master
+    branch: master
   url: https://github.com/oyedeletemitope/ml-infra
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
@@ -25,5 +25,5 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
-      name: wine-quality-classifier
+      name: wine-api         
       namespace: default
