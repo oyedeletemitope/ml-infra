@@ -26,7 +26,7 @@ spec:
       containers:
       - name: wine-api
         image: jozu.ml/oyedeletemitope76/wine-quality-modelkit/basic:v1.0.0
-        command: ["uvicorn"]
+        command: ["python", "-m", "uvicorn"]
         args: ["main:app", "--host", "0.0.0.0", "--port", "8000"]
         workingDir: /app
         ports:
