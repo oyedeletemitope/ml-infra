@@ -27,3 +27,4 @@ spec:
       kind: Deployment
       name: wine-api         
       namespace: default
+

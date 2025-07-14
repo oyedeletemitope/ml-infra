@@ -4,40 +4,56 @@ metadata:
   name: wine-api
   labels:
     app: wine-api
+    app.kubernetes.io/name: wine-api
+    app.kubernetes.io/component: ml-api
+    app.kubernetes.io/version: v1.0.0
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: wine-api
+      app.kubernetes.io/name: wine-api
+      app.kubernetes.io/component: ml-api
+      app.kubernetes.io/version: v1.0.0
   template:
     metadata:
       labels:
         app: wine-api
+        app.kubernetes.io/name: wine-api
+        app.kubernetes.io/component: ml-api
+        app.kubernetes.io/version: v1.0.0
     spec:
       containers:
-        - name: wine-api
-          image: jozu.ml/oyedeletemitope76/wine-quality-modelkit/basic:v1.0.0
-          ports:
-            - containerPort: 8000
-          env:
-            - name: PORT
-              value: "8000"
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 5
-            periodSeconds: 5
+      - name: wine-api
+        image: jozu.ml/oyedeletemitope76/wine-quality-modelkit/basic:v1.0.0
+        command: ["uvicorn"]
+        args: ["main:app", "--host", "0.0.0.0", "--port", "8000"]
+        workingDir: /app
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          value: "8000"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 1
+          failureThreshold: 3
